@@ -6,108 +6,108 @@
  * @version 1.105
  * @package entity
  */
-class Autonomia extends Db2PhpEntityBase implements Db2PhpEntityModificationTracking {
-	private static $CLASS_NAME='Autonomia';
+class Representacions extends Db2PhpEntityBase implements Db2PhpEntityModificationTracking {
+	private static $CLASS_NAME='Representacions';
 	const SQL_IDENTIFIER_QUOTE='';
-	const SQL_TABLE_NAME='autonomia';
-	const SQL_INSERT='INSERT INTO autonomia (id,slug,nombre) VALUES (?,?,?)';
-	const SQL_INSERT_AUTOINCREMENT='INSERT INTO autonomia (slug,nombre) VALUES (?,?)';
-	const SQL_UPDATE='UPDATE autonomia SET id=?,slug=?,nombre=? WHERE id=?';
-	const SQL_SELECT_PK='SELECT * FROM autonomia WHERE id=?';
-	const SQL_DELETE_PK='DELETE FROM autonomia WHERE id=?';
-	const FIELD_ID=1146251540;
-	const FIELD_SLUG=2036411492;
-	const FIELD_NOMBRE=-1654257854;
-	private static $PRIMARY_KEYS=array(self::FIELD_ID);
-	private static $AUTOINCREMENT_FIELDS=array(self::FIELD_ID);
+	const SQL_TABLE_NAME='representacions';
+	const SQL_INSERT='INSERT INTO representacions (Codi_Espectacle,Data,Hora) VALUES (?,?,?)';
+	const SQL_INSERT_AUTOINCREMENT='INSERT INTO representacions (Codi_Espectacle,Data,Hora) VALUES (?,?,?)';
+	const SQL_UPDATE='UPDATE representacions SET Codi_Espectacle=?,Data=?,Hora=? WHERE Codi_Espectacle=? AND Data=? AND Hora=?';
+	const SQL_SELECT_PK='SELECT * FROM representacions WHERE Codi_Espectacle=? AND Data=? AND Hora=?';
+	const SQL_DELETE_PK='DELETE FROM representacions WHERE Codi_Espectacle=? AND Data=? AND Hora=?';
+	const FIELD_CODI_ESPECTACLE=533485252;
+	const FIELD_DATA=-423545757;
+	const FIELD_HORA=-423413201;
+	private static $PRIMARY_KEYS=array(self::FIELD_CODI_ESPECTACLE,self::FIELD_DATA,self::FIELD_HORA);
+	private static $AUTOINCREMENT_FIELDS=array();
 	private static $FIELD_NAMES=array(
-		self::FIELD_ID=>'id',
-		self::FIELD_SLUG=>'slug',
-		self::FIELD_NOMBRE=>'nombre');
+		self::FIELD_CODI_ESPECTACLE=>'Codi_Espectacle',
+		self::FIELD_DATA=>'Data',
+		self::FIELD_HORA=>'Hora');
 	private static $PROPERTY_NAMES=array(
-		self::FIELD_ID=>'id',
-		self::FIELD_SLUG=>'slug',
-		self::FIELD_NOMBRE=>'nombre');
+		self::FIELD_CODI_ESPECTACLE=>'codiEspectacle',
+		self::FIELD_DATA=>'Data',
+		self::FIELD_HORA=>'Hora');
 	private static $PROPERTY_TYPES=array(
-		self::FIELD_ID=>Db2PhpEntity::PHP_TYPE_INT,
-		self::FIELD_SLUG=>Db2PhpEntity::PHP_TYPE_STRING,
-		self::FIELD_NOMBRE=>Db2PhpEntity::PHP_TYPE_STRING);
+		self::FIELD_CODI_ESPECTACLE=>Db2PhpEntity::PHP_TYPE_INT,
+		self::FIELD_DATA=>Db2PhpEntity::PHP_TYPE_STRING,
+		self::FIELD_HORA=>Db2PhpEntity::PHP_TYPE_STRING);
 	private static $FIELD_TYPES=array(
-		self::FIELD_ID=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
-		self::FIELD_SLUG=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,255,0,false),
-		self::FIELD_NOMBRE=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,255,0,false));
+		self::FIELD_CODI_ESPECTACLE=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
+		self::FIELD_DATA=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,50,0,false),
+		self::FIELD_HORA=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,50,0,false));
 	private static $DEFAULT_VALUES=array(
-		self::FIELD_ID=>null,
-		self::FIELD_SLUG=>'',
-		self::FIELD_NOMBRE=>'');
-	private $id;
-	private $slug;
-	private $nombre;
+		self::FIELD_CODI_ESPECTACLE=>0,
+		self::FIELD_DATA=>'',
+		self::FIELD_HORA=>'');
+	private $codiEspectacle;
+	private $Data;
+	private $Hora;
 
 	/**
-	 * set value for id 
+	 * set value for Codi_Espectacle 
 	 *
-	 * type:INT,size:10,default:null,primary,unique,autoincrement
+	 * type:INT,size:10,default:null,primary,unique
 	 *
-	 * @param mixed $id
+	 * @param mixed $codiEspectacle
 	 */
-	public function setId($id) {
-		$this->id=$id;
+	public function setCodiEspectacle($codiEspectacle) {
+		$this->codiEspectacle=$codiEspectacle;
 	}
 
 	/**
-	 * get value for id 
+	 * get value for Codi_Espectacle 
 	 *
-	 * type:INT,size:10,default:null,primary,unique,autoincrement
+	 * type:INT,size:10,default:null,primary,unique
 	 *
 	 * @return mixed
 	 */
-	public function getId() {
-		return $this->id;
+	public function getCodiEspectacle() {
+		return $this->codiEspectacle;
 	}
 
 	/**
-	 * set value for slug 
+	 * set value for Data 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:VARCHAR,size:50,default:null,primary,unique
 	 *
-	 * @param mixed $slug
+	 * @param mixed $Data
 	 */
-	public function setSlug($slug) {
-		$this->slug=$slug;
+	public function setData($Data) {
+		$this->Data=$Data;
 	}
 
 	/**
-	 * get value for slug 
+	 * get value for Data 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:VARCHAR,size:50,default:null,primary,unique
 	 *
 	 * @return mixed
 	 */
-	public function getSlug() {
-		return $this->slug;
+	public function getData() {
+		return $this->Data;
 	}
 
 	/**
-	 * set value for nombre 
+	 * set value for Hora 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:VARCHAR,size:50,default:null,primary,unique
 	 *
-	 * @param mixed $nombre
+	 * @param mixed $Hora
 	 */
-	public function setNombre($nombre) {
-		$this->nombre=$nombre;
+	public function setHora($Hora) {
+		$this->Hora=$Hora;
 	}
 
 	/**
-	 * get value for nombre 
+	 * get value for Hora 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:VARCHAR,size:50,default:null,primary,unique
 	 *
 	 * @return mixed
 	 */
-	public function getNombre() {
-		return $this->nombre;
+	public function getHora() {
+		return $this->Hora;
 	}
 
 	/**
@@ -221,9 +221,9 @@ class Autonomia extends Db2PhpEntityBase implements Db2PhpEntityModificationTrac
 	 */
 	public function toArray() {
 		return array(
-			self::FIELD_ID=>$this->getId(),
-			self::FIELD_SLUG=>$this->getSlug(),
-			self::FIELD_NOMBRE=>$this->getNombre());
+			self::FIELD_CODI_ESPECTACLE=>$this->getCodiEspectacle(),
+			self::FIELD_DATA=>$this->getData(),
+			self::FIELD_HORA=>$this->getHora());
 	}
 
 
@@ -234,7 +234,9 @@ class Autonomia extends Db2PhpEntityBase implements Db2PhpEntityModificationTrac
 	 */
 	public function getPrimaryKeyValues() {
 		return array(
-			self::FIELD_ID=>$this->getId());
+			self::FIELD_CODI_ESPECTACLE=>$this->getCodiEspectacle(),
+			self::FIELD_DATA=>$this->getData(),
+			self::FIELD_HORA=>$this->getHora());
 	}
 
 
@@ -244,30 +246,30 @@ class Autonomia extends Db2PhpEntityBase implements Db2PhpEntityModificationTrac
 	 * @return DOMDocument
 	 */
 	public function toDOM() {
-		return self::hashToDomDocument($this->toHash(), 'Autonomia');
+		return self::hashToDomDocument($this->toHash(), 'Representacions');
 	}
 
 	/**
-	 * get single Autonomia instance from a DOMElement
+	 * get single Representacions instance from a DOMElement
 	 *
 	 * @param DOMElement $node
-	 * @return Autonomia
+	 * @return Representacions
 	 */
 	public static function fromDOMElement(DOMElement $node) {
-		$o=new Autonomia();
+		$o=new Representacions();
 		$o->assignByHash(self::domNodeToHash($node, self::$FIELD_NAMES, self::$DEFAULT_VALUES, self::$FIELD_TYPES));
 		return $o;
 	}
 
 	/**
-	 * get all instances of Autonomia from the passed DOMDocument
+	 * get all instances of Representacions from the passed DOMDocument
 	 *
 	 * @param DOMDocument $doc
-	 * @return Autonomia[]
+	 * @return Representacions[]
 	 */
 	public static function fromDOMDocument(DOMDocument $doc) {
 		$instances=array();
-		foreach ($doc->getElementsByTagName('Autonomia') as $node) {
+		foreach ($doc->getElementsByTagName('Representacions') as $node) {
 			$instances[]=self::fromDOMElement($node);
 		}
 		return $instances;

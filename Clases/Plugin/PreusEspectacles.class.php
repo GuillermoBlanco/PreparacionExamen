@@ -6,108 +6,137 @@
  * @version 1.105
  * @package entity
  */
-class Valoracion extends Db2PhpEntityBase implements Db2PhpEntityModificationTracking {
-	private static $CLASS_NAME='Valoracion';
+class PreusEspectacles extends Db2PhpEntityBase implements Db2PhpEntityModificationTracking {
+	private static $CLASS_NAME='PreusEspectacles';
 	const SQL_IDENTIFIER_QUOTE='';
-	const SQL_TABLE_NAME='valoracion';
-	const SQL_INSERT='INSERT INTO valoracion (usuario,multimedia,valoracion) VALUES (?,?,?)';
-	const SQL_INSERT_AUTOINCREMENT='INSERT INTO valoracion (usuario,multimedia,valoracion) VALUES (?,?,?)';
-	const SQL_UPDATE='UPDATE valoracion SET usuario=?,multimedia=?,valoracion=? WHERE usuario=? AND multimedia=?';
-	const SQL_SELECT_PK='SELECT * FROM valoracion WHERE usuario=? AND multimedia=?';
-	const SQL_DELETE_PK='DELETE FROM valoracion WHERE usuario=? AND multimedia=?';
-	const FIELD_USUARIO=-1896068190;
-	const FIELD_MULTIMEDIA=522738007;
-	const FIELD_VALORACION=647441774;
-	private static $PRIMARY_KEYS=array(self::FIELD_USUARIO,self::FIELD_MULTIMEDIA);
+	const SQL_TABLE_NAME='preus_espectacles';
+	const SQL_INSERT='INSERT INTO preus_espectacles (Codi_Espectacle,Codi_Recinte,Zona,Preu) VALUES (?,?,?,?)';
+	const SQL_INSERT_AUTOINCREMENT='INSERT INTO preus_espectacles (Codi_Espectacle,Codi_Recinte,Zona,Preu) VALUES (?,?,?,?)';
+	const SQL_UPDATE='UPDATE preus_espectacles SET Codi_Espectacle=?,Codi_Recinte=?,Zona=?,Preu=? WHERE Codi_Espectacle=? AND Codi_Recinte=? AND Zona=?';
+	const SQL_SELECT_PK='SELECT * FROM preus_espectacles WHERE Codi_Espectacle=? AND Codi_Recinte=? AND Zona=?';
+	const SQL_DELETE_PK='DELETE FROM preus_espectacles WHERE Codi_Espectacle=? AND Codi_Recinte=? AND Zona=?';
+	const FIELD_CODI_ESPECTACLE=1922671797;
+	const FIELD_CODI_RECINTE=-1129374240;
+	const FIELD_ZONA=740517648;
+	const FIELD_PREU=740222362;
+	private static $PRIMARY_KEYS=array(self::FIELD_CODI_ESPECTACLE,self::FIELD_CODI_RECINTE,self::FIELD_ZONA);
 	private static $AUTOINCREMENT_FIELDS=array();
 	private static $FIELD_NAMES=array(
-		self::FIELD_USUARIO=>'usuario',
-		self::FIELD_MULTIMEDIA=>'multimedia',
-		self::FIELD_VALORACION=>'valoracion');
+		self::FIELD_CODI_ESPECTACLE=>'Codi_Espectacle',
+		self::FIELD_CODI_RECINTE=>'Codi_Recinte',
+		self::FIELD_ZONA=>'Zona',
+		self::FIELD_PREU=>'Preu');
 	private static $PROPERTY_NAMES=array(
-		self::FIELD_USUARIO=>'usuario',
-		self::FIELD_MULTIMEDIA=>'multimedia',
-		self::FIELD_VALORACION=>'valoracion');
+		self::FIELD_CODI_ESPECTACLE=>'codiEspectacle',
+		self::FIELD_CODI_RECINTE=>'codiRecinte',
+		self::FIELD_ZONA=>'Zona',
+		self::FIELD_PREU=>'Preu');
 	private static $PROPERTY_TYPES=array(
-		self::FIELD_USUARIO=>Db2PhpEntity::PHP_TYPE_INT,
-		self::FIELD_MULTIMEDIA=>Db2PhpEntity::PHP_TYPE_INT,
-		self::FIELD_VALORACION=>Db2PhpEntity::PHP_TYPE_BOOL);
+		self::FIELD_CODI_ESPECTACLE=>Db2PhpEntity::PHP_TYPE_INT,
+		self::FIELD_CODI_RECINTE=>Db2PhpEntity::PHP_TYPE_INT,
+		self::FIELD_ZONA=>Db2PhpEntity::PHP_TYPE_STRING,
+		self::FIELD_PREU=>Db2PhpEntity::PHP_TYPE_INT);
 	private static $FIELD_TYPES=array(
-		self::FIELD_USUARIO=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
-		self::FIELD_MULTIMEDIA=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
-		self::FIELD_VALORACION=>array(Db2PhpEntity::JDBC_TYPE_BIT,0,0,false));
+		self::FIELD_CODI_ESPECTACLE=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
+		self::FIELD_CODI_RECINTE=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
+		self::FIELD_ZONA=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,20,0,false),
+		self::FIELD_PREU=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,true));
 	private static $DEFAULT_VALUES=array(
-		self::FIELD_USUARIO=>0,
-		self::FIELD_MULTIMEDIA=>0,
-		self::FIELD_VALORACION=>'');
-	private $usuario;
-	private $multimedia;
-	private $valoracion;
+		self::FIELD_CODI_ESPECTACLE=>0,
+		self::FIELD_CODI_RECINTE=>0,
+		self::FIELD_ZONA=>'',
+		self::FIELD_PREU=>null);
+	private $codiEspectacle;
+	private $codiRecinte;
+	private $Zona;
+	private $Preu;
 
 	/**
-	 * set value for usuario 
+	 * set value for Codi_Espectacle 
 	 *
 	 * type:INT,size:10,default:null,primary,unique
 	 *
-	 * @param mixed $usuario
+	 * @param mixed $codiEspectacle
 	 */
-	public function setUsuario($usuario) {
-		$this->usuario=$usuario;
+	public function setCodiEspectacle($codiEspectacle) {
+		$this->codiEspectacle=$codiEspectacle;
 	}
 
 	/**
-	 * get value for usuario 
+	 * get value for Codi_Espectacle 
 	 *
 	 * type:INT,size:10,default:null,primary,unique
 	 *
 	 * @return mixed
 	 */
-	public function getUsuario() {
-		return $this->usuario;
+	public function getCodiEspectacle() {
+		return $this->codiEspectacle;
 	}
 
 	/**
-	 * set value for multimedia 
+	 * set value for Codi_Recinte 
 	 *
 	 * type:INT,size:10,default:null,primary,index
 	 *
-	 * @param mixed $multimedia
+	 * @param mixed $codiRecinte
 	 */
-	public function setMultimedia($multimedia) {
-		$this->multimedia=$multimedia;
+	public function setCodiRecinte($codiRecinte) {
+		$this->codiRecinte=$codiRecinte;
 	}
 
 	/**
-	 * get value for multimedia 
+	 * get value for Codi_Recinte 
 	 *
 	 * type:INT,size:10,default:null,primary,index
 	 *
 	 * @return mixed
 	 */
-	public function getMultimedia() {
-		return $this->multimedia;
+	public function getCodiRecinte() {
+		return $this->codiRecinte;
 	}
 
 	/**
-	 * set value for valoracion 
+	 * set value for Zona 
 	 *
-	 * type:BIT,size:0,default:null
+	 * type:VARCHAR,size:20,default:null,primary,index
 	 *
-	 * @param mixed $valoracion
+	 * @param mixed $Zona
 	 */
-	public function setValoracion($valoracion) {
-		$this->valoracion=$valoracion;
+	public function setZona($Zona) {
+		$this->Zona=$Zona;
 	}
 
 	/**
-	 * get value for valoracion 
+	 * get value for Zona 
 	 *
-	 * type:BIT,size:0,default:null
+	 * type:VARCHAR,size:20,default:null,primary,index
 	 *
 	 * @return mixed
 	 */
-	public function getValoracion() {
-		return $this->valoracion;
+	public function getZona() {
+		return $this->Zona;
+	}
+
+	/**
+	 * set value for Preu 
+	 *
+	 * type:INT,size:10,default:null,nullable
+	 *
+	 * @param mixed $Preu
+	 */
+	public function setPreu($Preu) {
+		$this->Preu=$Preu;
+	}
+
+	/**
+	 * get value for Preu 
+	 *
+	 * type:INT,size:10,default:null,nullable
+	 *
+	 * @return mixed
+	 */
+	public function getPreu() {
+		return $this->Preu;
 	}
 
 	/**
@@ -221,9 +250,10 @@ class Valoracion extends Db2PhpEntityBase implements Db2PhpEntityModificationTra
 	 */
 	public function toArray() {
 		return array(
-			self::FIELD_USUARIO=>$this->getUsuario(),
-			self::FIELD_MULTIMEDIA=>$this->getMultimedia(),
-			self::FIELD_VALORACION=>$this->getValoracion());
+			self::FIELD_CODI_ESPECTACLE=>$this->getCodiEspectacle(),
+			self::FIELD_CODI_RECINTE=>$this->getCodiRecinte(),
+			self::FIELD_ZONA=>$this->getZona(),
+			self::FIELD_PREU=>$this->getPreu());
 	}
 
 
@@ -234,8 +264,9 @@ class Valoracion extends Db2PhpEntityBase implements Db2PhpEntityModificationTra
 	 */
 	public function getPrimaryKeyValues() {
 		return array(
-			self::FIELD_USUARIO=>$this->getUsuario(),
-			self::FIELD_MULTIMEDIA=>$this->getMultimedia());
+			self::FIELD_CODI_ESPECTACLE=>$this->getCodiEspectacle(),
+			self::FIELD_CODI_RECINTE=>$this->getCodiRecinte(),
+			self::FIELD_ZONA=>$this->getZona());
 	}
 
 
@@ -245,30 +276,30 @@ class Valoracion extends Db2PhpEntityBase implements Db2PhpEntityModificationTra
 	 * @return DOMDocument
 	 */
 	public function toDOM() {
-		return self::hashToDomDocument($this->toHash(), 'Valoracion');
+		return self::hashToDomDocument($this->toHash(), 'PreusEspectacles');
 	}
 
 	/**
-	 * get single Valoracion instance from a DOMElement
+	 * get single PreusEspectacles instance from a DOMElement
 	 *
 	 * @param DOMElement $node
-	 * @return Valoracion
+	 * @return PreusEspectacles
 	 */
 	public static function fromDOMElement(DOMElement $node) {
-		$o=new Valoracion();
+		$o=new PreusEspectacles();
 		$o->assignByHash(self::domNodeToHash($node, self::$FIELD_NAMES, self::$DEFAULT_VALUES, self::$FIELD_TYPES));
 		return $o;
 	}
 
 	/**
-	 * get all instances of Valoracion from the passed DOMDocument
+	 * get all instances of PreusEspectacles from the passed DOMDocument
 	 *
 	 * @param DOMDocument $doc
-	 * @return Valoracion[]
+	 * @return PreusEspectacles[]
 	 */
 	public static function fromDOMDocument(DOMDocument $doc) {
 		$instances=array();
-		foreach ($doc->getElementsByTagName('Valoracion') as $node) {
+		foreach ($doc->getElementsByTagName('PreusEspectacles') as $node) {
 			$instances[]=self::fromDOMElement($node);
 		}
 		return $instances;

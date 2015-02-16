@@ -6,137 +6,108 @@
  * @version 1.105
  * @package entity
  */
-class Contacto extends Db2PhpEntityBase implements Db2PhpEntityModificationTracking {
-	private static $CLASS_NAME='Contacto';
+class ZonesRecinte extends Db2PhpEntityBase implements Db2PhpEntityModificationTracking {
+	private static $CLASS_NAME='ZonesRecinte';
 	const SQL_IDENTIFIER_QUOTE='';
-	const SQL_TABLE_NAME='contacto';
-	const SQL_INSERT='INSERT INTO contacto (id,email,asunto,texto) VALUES (?,?,?,?)';
-	const SQL_INSERT_AUTOINCREMENT='INSERT INTO contacto (email,asunto,texto) VALUES (?,?,?)';
-	const SQL_UPDATE='UPDATE contacto SET id=?,email=?,asunto=?,texto=? WHERE id=?';
-	const SQL_SELECT_PK='SELECT * FROM contacto WHERE id=?';
-	const SQL_DELETE_PK='DELETE FROM contacto WHERE id=?';
-	const FIELD_ID=41632538;
-	const FIELD_EMAIL=-973938371;
-	const FIELD_ASUNTO=-235692923;
-	const FIELD_TEXTO=-960301437;
-	private static $PRIMARY_KEYS=array(self::FIELD_ID);
-	private static $AUTOINCREMENT_FIELDS=array(self::FIELD_ID);
+	const SQL_TABLE_NAME='zones_recinte';
+	const SQL_INSERT='INSERT INTO zones_recinte (Codi_Recinte,Zona,Capacitat) VALUES (?,?,?)';
+	const SQL_INSERT_AUTOINCREMENT='INSERT INTO zones_recinte (Codi_Recinte,Zona,Capacitat) VALUES (?,?,?)';
+	const SQL_UPDATE='UPDATE zones_recinte SET Codi_Recinte=?,Zona=?,Capacitat=? WHERE Codi_Recinte=? AND Zona=?';
+	const SQL_SELECT_PK='SELECT * FROM zones_recinte WHERE Codi_Recinte=? AND Zona=?';
+	const SQL_DELETE_PK='DELETE FROM zones_recinte WHERE Codi_Recinte=? AND Zona=?';
+	const FIELD_CODI_RECINTE=-607020136;
+	const FIELD_ZONA=-1097130808;
+	const FIELD_CAPACITAT=-1237697806;
+	private static $PRIMARY_KEYS=array(self::FIELD_CODI_RECINTE,self::FIELD_ZONA);
+	private static $AUTOINCREMENT_FIELDS=array();
 	private static $FIELD_NAMES=array(
-		self::FIELD_ID=>'id',
-		self::FIELD_EMAIL=>'email',
-		self::FIELD_ASUNTO=>'asunto',
-		self::FIELD_TEXTO=>'texto');
+		self::FIELD_CODI_RECINTE=>'Codi_Recinte',
+		self::FIELD_ZONA=>'Zona',
+		self::FIELD_CAPACITAT=>'Capacitat');
 	private static $PROPERTY_NAMES=array(
-		self::FIELD_ID=>'id',
-		self::FIELD_EMAIL=>'email',
-		self::FIELD_ASUNTO=>'asunto',
-		self::FIELD_TEXTO=>'texto');
+		self::FIELD_CODI_RECINTE=>'codiRecinte',
+		self::FIELD_ZONA=>'Zona',
+		self::FIELD_CAPACITAT=>'Capacitat');
 	private static $PROPERTY_TYPES=array(
-		self::FIELD_ID=>Db2PhpEntity::PHP_TYPE_INT,
-		self::FIELD_EMAIL=>Db2PhpEntity::PHP_TYPE_STRING,
-		self::FIELD_ASUNTO=>Db2PhpEntity::PHP_TYPE_STRING,
-		self::FIELD_TEXTO=>Db2PhpEntity::PHP_TYPE_STRING);
+		self::FIELD_CODI_RECINTE=>Db2PhpEntity::PHP_TYPE_INT,
+		self::FIELD_ZONA=>Db2PhpEntity::PHP_TYPE_STRING,
+		self::FIELD_CAPACITAT=>Db2PhpEntity::PHP_TYPE_INT);
 	private static $FIELD_TYPES=array(
-		self::FIELD_ID=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
-		self::FIELD_EMAIL=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,255,0,false),
-		self::FIELD_ASUNTO=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,255,0,false),
-		self::FIELD_TEXTO=>array(Db2PhpEntity::JDBC_TYPE_LONGVARCHAR,65535,0,false));
+		self::FIELD_CODI_RECINTE=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,false),
+		self::FIELD_ZONA=>array(Db2PhpEntity::JDBC_TYPE_VARCHAR,20,0,false),
+		self::FIELD_CAPACITAT=>array(Db2PhpEntity::JDBC_TYPE_INTEGER,10,0,true));
 	private static $DEFAULT_VALUES=array(
-		self::FIELD_ID=>null,
-		self::FIELD_EMAIL=>'',
-		self::FIELD_ASUNTO=>'',
-		self::FIELD_TEXTO=>'');
-	private $id;
-	private $email;
-	private $asunto;
-	private $texto;
+		self::FIELD_CODI_RECINTE=>0,
+		self::FIELD_ZONA=>'',
+		self::FIELD_CAPACITAT=>null);
+	private $codiRecinte;
+	private $Zona;
+	private $Capacitat;
 
 	/**
-	 * set value for id 
+	 * set value for Codi_Recinte 
 	 *
-	 * type:INT,size:10,default:null,primary,unique,autoincrement
+	 * type:INT,size:10,default:null,primary,unique
 	 *
-	 * @param mixed $id
+	 * @param mixed $codiRecinte
 	 */
-	public function setId($id) {
-		$this->id=$id;
+	public function setCodiRecinte($codiRecinte) {
+		$this->codiRecinte=$codiRecinte;
 	}
 
 	/**
-	 * get value for id 
+	 * get value for Codi_Recinte 
 	 *
-	 * type:INT,size:10,default:null,primary,unique,autoincrement
+	 * type:INT,size:10,default:null,primary,unique
 	 *
 	 * @return mixed
 	 */
-	public function getId() {
-		return $this->id;
+	public function getCodiRecinte() {
+		return $this->codiRecinte;
 	}
 
 	/**
-	 * set value for email 
+	 * set value for Zona 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:VARCHAR,size:20,default:null,primary,unique
 	 *
-	 * @param mixed $email
+	 * @param mixed $Zona
 	 */
-	public function setEmail($email) {
-		$this->email=$email;
+	public function setZona($Zona) {
+		$this->Zona=$Zona;
 	}
 
 	/**
-	 * get value for email 
+	 * get value for Zona 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:VARCHAR,size:20,default:null,primary,unique
 	 *
 	 * @return mixed
 	 */
-	public function getEmail() {
-		return $this->email;
+	public function getZona() {
+		return $this->Zona;
 	}
 
 	/**
-	 * set value for asunto 
+	 * set value for Capacitat 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:INT,size:10,default:null,nullable
 	 *
-	 * @param mixed $asunto
+	 * @param mixed $Capacitat
 	 */
-	public function setAsunto($asunto) {
-		$this->asunto=$asunto;
+	public function setCapacitat($Capacitat) {
+		$this->Capacitat=$Capacitat;
 	}
 
 	/**
-	 * get value for asunto 
+	 * get value for Capacitat 
 	 *
-	 * type:VARCHAR,size:255,default:null
+	 * type:INT,size:10,default:null,nullable
 	 *
 	 * @return mixed
 	 */
-	public function getAsunto() {
-		return $this->asunto;
-	}
-
-	/**
-	 * set value for texto 
-	 *
-	 * type:TEXT,size:65535,default:null
-	 *
-	 * @param mixed $texto
-	 */
-	public function setTexto($texto) {
-		$this->texto=$texto;
-	}
-
-	/**
-	 * get value for texto 
-	 *
-	 * type:TEXT,size:65535,default:null
-	 *
-	 * @return mixed
-	 */
-	public function getTexto() {
-		return $this->texto;
+	public function getCapacitat() {
+		return $this->Capacitat;
 	}
 
 	/**
@@ -250,10 +221,9 @@ class Contacto extends Db2PhpEntityBase implements Db2PhpEntityModificationTrack
 	 */
 	public function toArray() {
 		return array(
-			self::FIELD_ID=>$this->getId(),
-			self::FIELD_EMAIL=>$this->getEmail(),
-			self::FIELD_ASUNTO=>$this->getAsunto(),
-			self::FIELD_TEXTO=>$this->getTexto());
+			self::FIELD_CODI_RECINTE=>$this->getCodiRecinte(),
+			self::FIELD_ZONA=>$this->getZona(),
+			self::FIELD_CAPACITAT=>$this->getCapacitat());
 	}
 
 
@@ -264,7 +234,8 @@ class Contacto extends Db2PhpEntityBase implements Db2PhpEntityModificationTrack
 	 */
 	public function getPrimaryKeyValues() {
 		return array(
-			self::FIELD_ID=>$this->getId());
+			self::FIELD_CODI_RECINTE=>$this->getCodiRecinte(),
+			self::FIELD_ZONA=>$this->getZona());
 	}
 
 
@@ -274,30 +245,30 @@ class Contacto extends Db2PhpEntityBase implements Db2PhpEntityModificationTrack
 	 * @return DOMDocument
 	 */
 	public function toDOM() {
-		return self::hashToDomDocument($this->toHash(), 'Contacto');
+		return self::hashToDomDocument($this->toHash(), 'ZonesRecinte');
 	}
 
 	/**
-	 * get single Contacto instance from a DOMElement
+	 * get single ZonesRecinte instance from a DOMElement
 	 *
 	 * @param DOMElement $node
-	 * @return Contacto
+	 * @return ZonesRecinte
 	 */
 	public static function fromDOMElement(DOMElement $node) {
-		$o=new Contacto();
+		$o=new ZonesRecinte();
 		$o->assignByHash(self::domNodeToHash($node, self::$FIELD_NAMES, self::$DEFAULT_VALUES, self::$FIELD_TYPES));
 		return $o;
 	}
 
 	/**
-	 * get all instances of Contacto from the passed DOMDocument
+	 * get all instances of ZonesRecinte from the passed DOMDocument
 	 *
 	 * @param DOMDocument $doc
-	 * @return Contacto[]
+	 * @return ZonesRecinte[]
 	 */
 	public static function fromDOMDocument(DOMDocument $doc) {
 		$instances=array();
-		foreach ($doc->getElementsByTagName('Contacto') as $node) {
+		foreach ($doc->getElementsByTagName('ZonesRecinte') as $node) {
 			$instances[]=self::fromDOMElement($node);
 		}
 		return $instances;

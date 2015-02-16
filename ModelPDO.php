@@ -21,7 +21,7 @@ abstract class ModelPDO {
 	 * Nom de la base de dades
 	 * @var string
 	 */
-	private $db = "recetas";
+	private $db = "examenm7uf";
 	
 	/**
 	 * Nom d'usuari
