@@ -6,12 +6,12 @@
  */
 class zones_recinte {
 
-    	private $codiRecinte;
+    	private $Codi_Recinte;
 	private $Zona;
 	private $Capacitat;
         
         public function getCodiRecinte() {
-            return $this->codiRecinte;
+            return $this->Codi_Recinte;
         }
 
         public function getZona() {
@@ -23,7 +23,7 @@ class zones_recinte {
         }
 
         public function setCodiRecinte($codiRecinte) {
-            $this->codiRecinte = $codiRecinte;
+            $this->Codi_Recinte = $codiRecinte;
         }
 
         public function setZona($Zona) {

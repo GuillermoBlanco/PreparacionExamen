@@ -15,7 +15,7 @@ class recintes {
 
     	private $Codi;
 	private $Nom;
-	private $adreA;
+	private $Adreça;
 	private $Ciutat;
 	private $Telefon;
 	private $Horari;
@@ -29,7 +29,7 @@ class recintes {
         }
 
         public function getAdreA() {
-            return $this->adreA;
+            return $this->Adreça;
         }
 
         public function getCiutat() {
@@ -53,7 +53,7 @@ class recintes {
         }
 
         public function setAdreA($adreA) {
-            $this->adreA = $adreA;
+            $this->Adreça = $adreA;
         }
 
         public function setCiutat($Ciutat) {

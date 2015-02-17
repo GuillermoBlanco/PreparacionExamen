@@ -13,12 +13,12 @@
  */
 class representacions {
 
-    	private $codiEspectacle;
+    	private $Codi_Espectacle;
 	private $Data;
 	private $Hora;
         
         public function getCodiEspectacle() {
-            return $this->codiEspectacle;
+            return $this->Codi_Espectacle;
         }
 
         public function getData() {
@@ -30,7 +30,7 @@ class representacions {
         }
 
         public function setCodiEspectacle($codiEspectacle) {
-            $this->codiEspectacle = $codiEspectacle;
+            $this->Codi_Espectacle = $codiEspectacle;
         }
 
         public function setData($Data) {

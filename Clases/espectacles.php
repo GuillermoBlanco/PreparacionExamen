@@ -19,7 +19,7 @@ class espectacles {
 	private $dataInicial;
 	private $dataFinal;
 	private $Interpret;
-	private $codiRecinte;
+	private $Codi_Recinte;
         
         public function getCodi() {
             return $this->Codi;
@@ -46,7 +46,7 @@ class espectacles {
         }
 
         public function getCodiRecinte() {
-            return $this->codiRecinte;
+            return $this->Codi_Recinte;
         }
 
         public function setCodi($Codi) {
@@ -74,7 +74,7 @@ class espectacles {
         }
 
         public function setCodiRecinte($codiRecinte) {
-            $this->codiRecinte = $codiRecinte;
+            $this->Codi_Recinte = $codiRecinte;
         }
 
 
