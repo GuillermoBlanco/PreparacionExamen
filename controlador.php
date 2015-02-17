@@ -32,7 +32,7 @@ class controlador extends ModelPDO {
 
 		$oDB = $this->getDBO();
 
-		$query = $oDB->query( 'SELECT * FROM representacions WHERE Codi_Espectacle='.$codiEspectacle.' AND Data='.$data.' AND Hora='.$hora);
+		$query = $oDB->query( "SELECT * FROM representacions WHERE Codi_Espectacle='".$codiEspectacle."' AND Data='".$data."' AND Hora='".$hora."'");
 
 		$espectacle = $query->fetchObject("representacions");
 
