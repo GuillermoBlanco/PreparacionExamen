@@ -5,23 +5,25 @@ session_start();
 
 $modelo= new controlador();
 
-if (isset($_SESSION['representacion']) || isset($_GET['representacions'])){
-    if (isset($_GET['representacions'])) {
+if (isset($_SESSION['representacion']) || isset($_GET['representacion'])){
+    if (isset($_GET['representacion'])) {
         
-        $espectacle=explode(",",$_GET['representacions']);
+        $espectacle=explode(",",$_GET['representacion']);
         $_SESSION['representacion']=$modelo->getRepresentacion($espectacle[0],$espectacle[1],$espectacle[2]);
         $_SESSION['espectacle']=$modelo->getEspectacle($espectacle[0]);
         $_SESSION['recinte']=$modelo->getRecinto($_SESSION['espectacle']->getCodiRecinte());
     }
 
     //Recoger asientos para poder comprar
-    if(isset($_GET['zona'])){
-        
-    }
     echo '<p>Espectaculo: '.$_SESSION['espectacle']->getNom().'</p>';
     echo '<p>Dia: '.explode(" ",$_SESSION['representacion']->getData())[0].' Hora: '.explode(" ",$_SESSION['representacion']->getHora())[1].'</p>';
     echo '<p>Recinto: '.$_SESSION['recinte']->getNom().', '.$_SESSION['recinte']->getAdreA().'. '.$_SESSION['recinte']->getCiutat();
     showZonas($modelo);
+
+    if(isset($_GET['zona'])){
+        $_SESSION['zona']=$_GET['zona'];
+        showAsientos($modelo);
+    }
 }
 elseif (!isset($_SESSION['espectacle']) && !isset($_GET['representacions'])) {
     showSelectEspectacles($modelo);
@@ -51,7 +53,7 @@ function showSelectEspectacles($modelo){
 function showSelectRepresentacions($modelo){
     $representacions;
     if ($representacions=$modelo->getRepresentacions($_GET['espectacle'])) {
-        echo "<form method=get action='index.php'><select name = 'representacions'>";
+        echo "<form method=get action='index.php'><select name = 'representacion'>";
         foreach ($representacions as $representacio) {
             echo "<option value = '".$_GET['espectacle'].",".$representacio->getData().",".$representacio->getHora()."'";
             //echo ">".date("d \of F",  strtotime($representacio->getData()))." - ".strtotime($representacio->getHora()).$representacio->getHora()."</option>";
@@ -63,14 +65,34 @@ function showSelectRepresentacions($modelo){
 
 function showZonas($modelo){
     if($zonas=$modelo->getZonas($_SESSION['recinte']->getCodi())){
-        echo "<form method=get action='index.php'><select name = 'zonas'>";
+        echo "<form method=get action='index.php'><select name = 'zona'>";
         foreach ($zonas as $zona) {
-            $ocupados=$modelo->getAsignados($_SESSION['representacion'],$_SESSION['recinte'],$zona->getZona());
+            $ocupados=$modelo->countAsignados($_SESSION['representacion'],$_SESSION['recinte'],$zona->getZona());
             echo "<option value = '".$zona->getZona()."'";
-            //echo ">".date("d \of F",  strtotime($representacio->getData()))." - ".strtotime($representacio->getHora()).$representacio->getHora()."</option>";
+            if (isset($_GET['zona']) && $zona->getZona()==$_GET['zona']) {
+                echo 'selected';
+            }
             echo ">".$zona->getZona()." - ".($zona->getCapacitat()- $ocupados)." asientos libres</option>";
         }
         echo "</select><button type='submit'>Elegir zona</button></form>";
+    }
+}
+
+function showAsientos($modelo){
+    if($asientos=$modelo->getAsientos($_SESSION['recinte']->getCodi(),$_SESSION['zona'])){
+        $ocupados=$modelo->getAsignados($_SESSION['representacion'],$_SESSION['recinte'],$_SESSION['zona']);
+        echo "<form method=get action='index.php'>";
+        foreach ($asientos as $asiento) {
+            if (in_array($asiento, $ocupados)) {
+                echo "<span style='color:red'>X  Fila: ".$asiento->getFila()."- Asiento: ".$asiento->getNumero()."</span>";
+            }
+            else {
+                echo '<input type="checkbox" name="asientos[]" value="'.$asiento->getFila().','.$asiento->getNumero().'">Fila: '.$asiento->getFila().'- Asiento: '.$asiento->getNumero().'';
+            }
+            echo '</br>';
+        }
+        echo '</br>';
+        echo "<button type='submit'>Elegir Asientos</button></form>";
     }
 }
 

@@ -6,13 +6,13 @@
  */
 class seients {
 
-    	private $codiRecinte;
+    	private $Codi_Recinte;
 	private $Zona;
 	private $Fila;
 	private $Numero;
         
         public function getCodiRecinte() {
-            return $this->codiRecinte;
+            return $this->Codi_Recinte;
         }
 
         public function getZona() {
@@ -28,7 +28,7 @@ class seients {
         }
 
         public function setCodiRecinte($codiRecinte) {
-            $this->codiRecinte = $codiRecinte;
+            $this->Codi_Recinte = $codiRecinte;
         }
 
         public function setZona($Zona) {

@@ -5,6 +5,7 @@ require_once "Clases/representacions.php";
 require_once "Clases/recintes.php";
 require_once "Clases/zones_recinte.php";
 require_once "Clases/entrades.php";
+require_once "Clases/seients.php";
 
 class controlador extends ModelPDO {
 
@@ -75,7 +76,18 @@ class controlador extends ModelPDO {
 		return $zonas;
 	}
 
-        public function getAsignados($representacion,$recinte,$zona){
+        public function getAsientos($codiRecinte, $zona){
+
+		$oDB = $this->getDBO();
+
+		$query = $oDB->query('SELECT * FROM seients WHERE Codi_Recinte='.$codiRecinte.' AND Zona="'.$zona.'"');
+
+		$asientos = $query->fetchAll(PDO::FETCH_CLASS,"seients");
+
+		return $asientos;
+	}
+
+        public function countAsignados($representacion,$recinte,$zona){
 		$oDB = $this->getDBO();
 
 		$query = $oDB->query('SELECT count(*) FROM entrades WHERE Codi_Espectacle='.$representacion->getCodiEspectacle().' AND Data="'.$representacion->getData().'" AND Hora="'.$representacion->getHora().'" AND Zona="'.$zona.'"');
@@ -83,6 +95,16 @@ class controlador extends ModelPDO {
 		$entrades = $query->fetch(PDO::FETCH_NUM);
 
 		return $entrades[0];
+	}
+        
+        public function getAsignados($representacion,$recinte,$zona){
+		$oDB = $this->getDBO();
+
+		$query = $oDB->query('SELECT Codi_Recinte,Zona,Fila,Numero FROM entrades WHERE Codi_Espectacle='.$representacion->getCodiEspectacle().' AND Data="'.$representacion->getData().'" AND Hora="'.$representacion->getHora().'" AND Zona="'.$zona.'"');
+
+		$asientos = $query->fetchAll(PDO::FETCH_CLASS,"seients");
+
+		return $asientos;
 	}
         
 //	public function users(){
