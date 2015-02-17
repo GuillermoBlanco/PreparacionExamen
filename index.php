@@ -1,50 +1,30 @@
 <?php
 require_once "./controlador.php";
 session_start();
-date_default_timezone_set("Europe/Madrid");
+//date_default_timezone_set("Europe/Madrid");
 
 $modelo= new controlador();
 
-if (!isset($_SESSION['espectacle']) && !isset($_GET['representacions'])) {
-    showSelectEspectacles($modelo);
-    if (!isset($_SESSION['representacion']) && isset($_GET['espectacle'])) {
-        showSelectRepresentacions($modelo);
-
-    }
-}else{
+if (isset($_SESSION['representacion']) || isset($_GET['representacions'])){
     if (isset($_GET['representacions'])) {
         
         $espectacle=explode(",",$_GET['representacions']);
         $_SESSION['representacion']=$modelo->getRepresentacion($espectacle[0],$espectacle[1],$espectacle[2]);
         $_SESSION['espectacle']=$modelo->getEspectacle($espectacle[0]);
     }
-    
+
+    //Recoger asientos para poder comprar
+
 }
-    
+elseif (!isset($_SESSION['espectacle']) && !isset($_GET['representacions'])) {
+    showSelectEspectacles($modelo);
+    if (!isset($_SESSION['representacion']) && isset($_GET['espectacle'])) {
+        showSelectRepresentacions($modelo);
+
+    }
+}
 
 
-//else{
-//    $_SESSION['user']=$controlador->checkuser($_GET['login'],$_GET['password']);
-//    
-//    if ($_SESSION['user']) {
-//        switch ($_SESSION['user']->getRol()) {
-//            case $ADMIN:
-//                include 'Plantillas/admin.html';
-//                break;
-//            case $USER:
-//                include 'Plantillas/user.html';
-//                break;
-//
-//            default:
-//                break;
-//        }
-//    }
-//    else {
-//        echo 'Uuario no válido';
-//    }
-//
-//    
-//}
 
 function showSelectEspectacles($modelo){
     $espectacles;
