@@ -65,8 +65,15 @@ function showSelectRepresentacions($modelo){
         echo "<form method=get action='index.php'><select name = 'representacion'>";
         foreach ($representacions as $representacio) {
             echo "<option value = '".$_SESSION['espectacle']->getCodi().",".$representacio->getData().",".$representacio->getHora()."'";
-            //echo ">".date("d \of F",  strtotime($representacio->getData()))." - ".strtotime($representacio->getHora()).$representacio->getHora()."</option>";
-            echo ">".explode(" ",$representacio->getData())[0]." - ".explode(" ",$representacio->getHora())[1]."</option>";
+                //Arreglar refresco
+                //------------------
+                // if ( isset($_SESSION['representacion']) && $representacio->getData()==$_SESSION['representacion']->getData()) {
+                //     echo 'selected';
+                // }
+                // elseif (isset($_GET['representacion']) && $representacio->getCodi()==$_GET['representacion']) {
+                //     echo 'selected';
+                // }            
+                echo ">".explode(" ",$representacio->getData())[0]." - ".explode(" ",$representacio->getHora())[1]."</option>";
         }
         echo "</select><button type='submit'>Elegir representacion</button></form>";
     }
