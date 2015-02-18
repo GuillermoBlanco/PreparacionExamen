@@ -5,39 +5,33 @@ session_start();
 
 $modelo= new controlador();
 
-include "Plantillas/cabecera.html";
-
-showSelectEspectacles($modelo);
-
-if (isset($_SESSION['espectacle']) || isset($_GET['espectacle'])) {
-    if(isset($_GET['espectacle'])){
-        $_SESSION['espectacle']=$modelo->getEspectacle($_GET['espectacle']);
-    }
-
-    showSelectRepresentacions($modelo);
-
-}
-
 if (isset($_SESSION['representacion']) || isset($_GET['representacion'])){
     if (isset($_GET['representacion'])) {
         
         $espectacle=explode(",",$_GET['representacion']);
         $_SESSION['representacion']=$modelo->getRepresentacion($espectacle[0],$espectacle[1],$espectacle[2]);
+        $_SESSION['espectacle']=$modelo->getEspectacle($espectacle[0]);
         $_SESSION['recinte']=$modelo->getRecinto($_SESSION['espectacle']->getCodiRecinte());
     }
-    showInfoEspectacle();
-   
+
+    //Recoger asientos para poder comprar
+    echo '<p>Espectaculo: '.$_SESSION['espectacle']->getNom().'</p>';
+    echo '<p>Dia: '.explode(" ",$_SESSION['representacion']->getData())[0].' Hora: '.explode(" ",$_SESSION['representacion']->getHora())[1].'</p>';
+    echo '<p>Recinto: '.$_SESSION['recinte']->getNom().', '.$_SESSION['recinte']->getAdreA().'. '.$_SESSION['recinte']->getCiutat();
     showZonas($modelo);
 
-}
-
-if(isset($_GET['zona']) || isset($_SESSION['zona'])){
     if(isset($_GET['zona'])){
-        $_SESSION['zona']=$_GET['zona']; 
+        $_SESSION['zona']=$_GET['zona'];
+        showAsientos($modelo);
     }
-    showAsientos($modelo);
 }
+elseif (!isset($_SESSION['espectacle']) && !isset($_GET['representacions'])) {
+    showSelectEspectacles($modelo);
+    if (!isset($_SESSION['representacion']) && isset($_GET['espectacle'])) {
+        showSelectRepresentacions($modelo);
 
+    }
+}
 
 
 
@@ -47,10 +41,7 @@ function showSelectEspectacles($modelo){
             echo "<form method=get action='index.php'><select name = 'espectacle'>";
             foreach ($espectacles as $espectacle) {
                 echo "<option value = '".$espectacle->getCodi()."'";
-                if ( isset($_SESSION['espectacle']) && $espectacle->getCodi()==$_SESSION['espectacle']) {
-                    echo 'selected';
-                }
-                elseif (isset($_GET['espectacle']) && $espectacle->getCodi()==$_GET['espectacle']) {
+                if (isset($_GET['espectacle']) && $espectacle->getCodi()==$_GET['espectacle']) {
                     echo 'selected';
                 }
                 echo ">".$espectacle->getNom()."</option>";
@@ -61,19 +52,15 @@ function showSelectEspectacles($modelo){
 
 function showSelectRepresentacions($modelo){
     $representacions;
-    if ($representacions=$modelo->getRepresentacions($_SESSION['espectacle']->getCodi())) {
+    if ($representacions=$modelo->getRepresentacions($_GET['espectacle'])) {
         echo "<form method=get action='index.php'><select name = 'representacion'>";
         foreach ($representacions as $representacio) {
-            echo "<option value = '".$_SESSION['espectacle']->getCodi().",".$representacio->getData().",".$representacio->getHora()."'";
+            echo "<option value = '".$_GET['espectacle'].",".$representacio->getData().",".$representacio->getHora()."'";
             //echo ">".date("d \of F",  strtotime($representacio->getData()))." - ".strtotime($representacio->getHora()).$representacio->getHora()."</option>";
             echo ">".explode(" ",$representacio->getData())[0]." - ".explode(" ",$representacio->getHora())[1]."</option>";
         }
         echo "</select><button type='submit'>Elegir representacion</button></form>";
     }
-}
-
-function showInfoEspectacle(){
-    echo '<p>Recinto: '.$_SESSION['recinte']->getNom().', '.$_SESSION['recinte']->getAdreA().'. '.$_SESSION['recinte']->getCiutat();
 }
 
 function showZonas($modelo){
