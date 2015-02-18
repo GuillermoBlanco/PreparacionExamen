@@ -1,0 +1,1 @@
+<div><?php $entrada->getCodiEspectacle();?></div>

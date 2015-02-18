@@ -6,17 +6,17 @@
  * @author Melliw
  */
 class entrades {
-    	private $codiEspectacle;
+    	private $Codi_Espectacle;
 	private $Data;
 	private $Hora;
-	private $codiRecinte;
+	private $Codi_Recinte;
 	private $Zona;
 	private $Fila;
 	private $Numero;
-	private $dniClient;
+	private $DNI_Client;
         
         public function getCodiEspectacle() {
-            return $this->codiEspectacle;
+            return $this->Codi_Espectacle;
         }
 
         public function getData() {
@@ -28,7 +28,7 @@ class entrades {
         }
 
         public function getCodiRecinte() {
-            return $this->codiRecinte;
+            return $this->Codi_Recinte;
         }
 
         public function getZona() {
@@ -44,11 +44,11 @@ class entrades {
         }
 
         public function getDniClient() {
-            return $this->dniClient;
+            return $this->DNI_Client;
         }
 
         public function setCodiEspectacle($codiEspectacle) {
-            $this->codiEspectacle = $codiEspectacle;
+            $this->Codi_Espectacle= $codiEspectacle;
         }
 
         public function setData($Data) {
@@ -60,7 +60,7 @@ class entrades {
         }
 
         public function setCodiRecinte($codiRecinte) {
-            $this->codiRecinte = $codiRecinte;
+            $this->Codi_Recinte= $codiRecinte;
         }
 
         public function setZona($Zona) {
@@ -76,7 +76,7 @@ class entrades {
         }
 
         public function setDniClient($dniClient) {
-            $this->dniClient = $dniClient;
+            $this->DNI_Client= $dniClient;
         }
 
 

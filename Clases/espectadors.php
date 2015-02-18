@@ -13,17 +13,17 @@
  */
 class espectadors {
     
-    	private $dni;
+    	private $DNI;
 	private $Nom;
 	private $Cognoms;
-	private $adreA;
+	private $Adreça;
 	private $Telefon;
 	private $Ciutat;
-	private $compteCorrent;
-	private $numTargeta;
+	private $Compte_Corrent;
+	private $Num_Targeta;
         
         public function getDni() {
-            return $this->dni;
+            return $this->DNI;
         }
 
         public function getNom() {
@@ -35,7 +35,7 @@ class espectadors {
         }
 
         public function getAdreA() {
-            return $this->adreA;
+            return $this->Adreça;
         }
 
         public function getTelefon() {
@@ -47,15 +47,15 @@ class espectadors {
         }
 
         public function getCompteCorrent() {
-            return $this->compteCorrent;
+            return $this->Compte_Corrent;
         }
 
         public function getNumTargeta() {
-            return $this->numTargeta;
+            return $this->Num_Targeta;
         }
 
         public function setDni($dni) {
-            $this->dni = $dni;
+            $this->DNI = $dni;
         }
 
         public function setNom($Nom) {
@@ -67,7 +67,7 @@ class espectadors {
         }
 
         public function setAdreA($adreA) {
-            $this->adreA = $adreA;
+            $this->Adreça = $adreA;
         }
 
         public function setTelefon($Telefon) {
@@ -79,11 +79,11 @@ class espectadors {
         }
 
         public function setCompteCorrent($compteCorrent) {
-            $this->compteCorrent = $compteCorrent;
+            $this->Compte_Corrent= $compteCorrent;
         }
 
         public function setNumTargeta($numTargeta) {
-            $this->numTargeta = $numTargeta;
+            $this->Num_Targeta= $numTargeta;
         }
 
 

@@ -5,40 +5,54 @@ session_start();
 
 $modelo= new controlador();
 
-include "Plantillas/cabecera.html";
+include "Templates/cabecera.html";
 
-showSelectEspectacles($modelo);
-
-if (isset($_SESSION['espectacle']) || isset($_GET['espectacle'])) {
-    if(isset($_GET['espectacle'])){
-        $_SESSION['espectacle']=$modelo->getEspectacle($_GET['espectacle']);
+if (isset($_GET["action"]) ){
+    if ($_GET["action"]=="inicio") {
+        session_destroy();
+    header('Location: '.$_SERVER['PHP_SELF']);
     }
 
-    showSelectRepresentacions($modelo);
-
-}
-
-if (isset($_SESSION['representacion']) || isset($_GET['representacion'])){
-    if (isset($_GET['representacion'])) {
-        
-        $espectacle=explode(",",$_GET['representacion']);
-        $_SESSION['representacion']=$modelo->getRepresentacion($espectacle[0],$espectacle[1],$espectacle[2]);
-        $_SESSION['recinte']=$modelo->getRecinto($_SESSION['espectacle']->getCodiRecinte());
+}elseif (isset($_GET["DNI"])) {
+    if ($_SESSION['user']=$modelo->getUsuario($_GET["DNI"])) {
+        echo 'Hola '.$_SESSION['user']->getNom().'!!!';
+        muestraEntradasUsuario($modelo);
     }
-    showInfoEspectacle();
-   
-    showZonas($modelo);
 
-}
+}else{
 
-if(isset($_GET['zona']) || isset($_SESSION['zona'])){
-    if(isset($_GET['zona'])){
-        $_SESSION['zona']=$_GET['zona']; 
+    showSelectEspectacles($modelo);
+
+    if (isset($_SESSION['espectacle']) || isset($_GET['espectacle'])) {
+        if(isset($_GET['espectacle'])){
+            $_SESSION['espectacle']=$modelo->getEspectacle($_GET['espectacle']);
+        }
+        if (isset($_GET['representacion'])) {
+
+            $espectacle=explode(",",$_GET['representacion']);
+            $_SESSION['representacion']=$modelo->getRepresentacion($espectacle[0],$espectacle[1],$espectacle[2]);
+            $_SESSION['recinte']=$modelo->getRecinto($_SESSION['espectacle']->getCodiRecinte());
+        }
+
+        showSelectRepresentacions($modelo);
+
     }
-    showAsientos($modelo);
+
+    if (isset($_SESSION['representacion'])){
+
+        showInfoEspectacle();
+        showZonas($modelo);
+
+    }
+
+    if(isset($_GET['zona']) || isset($_SESSION['zona'])){
+        if(isset($_GET['zona'])){
+            $_SESSION['zona']=$_GET['zona']; 
+        }
+        showAsientos($modelo);
+    }
+
 }
-
-
 
 
 function showSelectEspectacles($modelo){
@@ -67,12 +81,12 @@ function showSelectRepresentacions($modelo){
             echo "<option value = '".$_SESSION['espectacle']->getCodi().",".$representacio->getData().",".$representacio->getHora()."'";
                 //Arreglar refresco
                 //------------------
-                // if ( isset($_SESSION['representacion']) && $representacio->getData()==$_SESSION['representacion']->getData()) {
-                //     echo 'selected';
-                // }
-                // elseif (isset($_GET['representacion']) && $representacio->getCodi()==$_GET['representacion']) {
-                //     echo 'selected';
-                // }            
+                 if ( isset($_SESSION['representacion']) && $representacio->getData()==$_SESSION['representacion']->getData()) {
+                     echo 'selected';
+                 }
+//                 elseif (isset($_GET['representacion']) && $representacio->getCodi()==$_GET['representacion']) {
+//                     echo 'selected';
+//                 }            
                 echo ">".explode(" ",$representacio->getData())[0]." - ".explode(" ",$representacio->getHora())[1]."</option>";
         }
         echo "</select><button type='submit'>Elegir representacion</button></form>";
@@ -114,6 +128,15 @@ function showAsientos($modelo){
         echo '</br>';
         echo "<button type='submit'>Elegir Asientos</button></form>";
     }
+}
+
+function muestraEntradasUsuario($modelo){
+    if ($entradas=$modelo->getEntradasUsuario($_SESSION["user"]->getDni())) {
+        foreach ($entradas as $entrada) {
+            echo '<div>'.$modelo->getEspectacle($entrada->getCodiEspectacle())->getNom().'</div>';
+//            include 'Templates/entrada.php';            
+        }
+    };
 }
 
 

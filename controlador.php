@@ -6,6 +6,7 @@ require_once "Clases/recintes.php";
 require_once "Clases/zones_recinte.php";
 require_once "Clases/entrades.php";
 require_once "Clases/seients.php";
+require_once "Clases/espectadors.php";
 
 class controlador extends ModelPDO {
 
@@ -106,6 +107,27 @@ class controlador extends ModelPDO {
 
 		return $asientos;
 	}
+        
+        public function getUsuario($dni){
+		$oDB = $this->getDBO();
+
+		$query = $oDB->query('SELECT * FROM espectadors WHERE DNI='.$dni);
+
+		$usuario = $query->fetchObject("espectadors");
+
+		return $usuario;
+	}
+        
+        public function getEntradasUsuario($dni){
+		$oDB = $this->getDBO();
+
+		$query = $oDB->query('SELECT * FROM entrades WHERE DNI_Client='.$dni);
+
+		$entradas = $query->fetchAll(PDO::FETCH_CLASS,"entrades");
+
+		return $entradas;
+	}
+        
         
 //	public function users(){
 //
