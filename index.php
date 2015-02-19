@@ -12,7 +12,7 @@ if (isset($_GET["DNI"])) {
     if ($_SESSION['user']=$modelo->getUsuario($_GET["DNI"])) {
         //echo 'Hola '.$_SESSION['user']->getNom().'!!!';
         muestraEntradasUsuario($modelo);
-    }
+    }else{header('Location: '.$_SERVER['PHP_SELF']);}    
 
 }elseif (isset($_GET["action"]) ){
     if ($_GET["action"]=="inicio") {
@@ -29,6 +29,8 @@ if (isset($_GET["DNI"])) {
         if(isset($_GET['espectacle'])){
             $_SESSION['espectacle']=$modelo->getEspectacle($_GET['espectacle']);
         }
+
+
         if (isset($_GET['representacion'])) {
 
             $espectacle=explode(",",$_GET['representacion']);
@@ -63,7 +65,7 @@ function showSelectEspectacles($modelo){
             echo "<form method=get action='index.php'><select name = 'espectacle'>";
             foreach ($espectacles as $espectacle) {
                 echo "<option value = '".$espectacle->getCodi()."'";
-                if ( isset($_SESSION['espectacle']) && $espectacle->getCodi()==$_SESSION['espectacle']) {
+                if ( isset($_SESSION['espectacle']) && $espectacle->getCodi()==$_SESSION['espectacle']->getCodi()) {
                     echo 'selected';
                 }
                 elseif (isset($_GET['espectacle']) && $espectacle->getCodi()==$_GET['espectacle']) {
