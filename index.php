@@ -1,26 +1,28 @@
 <?php
 require_once "./controlador.php";
+require "fpdf.php";
 session_start();
 //date_default_timezone_set("Europe/Madrid");
 
 $modelo= new controlador();
 
-include "Templates/cabecera.html";
+//include "Templates/cabecera.html";
 
-if (isset($_GET["action"]) ){
+if (isset($_GET["DNI"])) {
+    if ($_SESSION['user']=$modelo->getUsuario($_GET["DNI"])) {
+        //echo 'Hola '.$_SESSION['user']->getNom().'!!!';
+        muestraEntradasUsuario($modelo);
+    }
+
+}elseif (isset($_GET["action"]) ){
     if ($_GET["action"]=="inicio") {
         session_destroy();
     header('Location: '.$_SERVER['PHP_SELF']);
     }
 
-}elseif (isset($_GET["DNI"])) {
-    if ($_SESSION['user']=$modelo->getUsuario($_GET["DNI"])) {
-        echo 'Hola '.$_SESSION['user']->getNom().'!!!';
-        muestraEntradasUsuario($modelo);
-    }
-
 }else{
-
+    include "Templates/cabecera.html";
+    
     showSelectEspectacles($modelo);
 
     if (isset($_SESSION['espectacle']) || isset($_GET['espectacle'])) {
@@ -131,12 +133,24 @@ function showAsientos($modelo){
 }
 
 function muestraEntradasUsuario($modelo){
+
     if ($entradas=$modelo->getEntradasUsuario($_SESSION["user"]->getDni())) {
+        $pdf = new FPDF('L','mm','A5');
+        $pdf->SetFont('Arial','B',16);
         foreach ($entradas as $entrada) {
-            echo '<div>'.$modelo->getEspectacle($entrada->getCodiEspectacle())->getNom().'</div>';
-//            include 'Templates/entrada.php';            
+            $recinto=$modelo->getRecinto($entrada->getCodiRecinte());
+            $pdf->AddPage();            
+            $pdf->Cell(190,10,'Entradas para representacion de: '.$modelo->getEspectacle($entrada->getCodiEspectacle())->getNom(),1);
+            $pdf->Ln(); 
+            $pdf->MultiCell(190,30,explode(" ",$entrada->getData())[0].' '.explode(" ",$entrada->getHora())[1].' - Zona: '.$entrada->getZona().' - Fila: '.$entrada->getFila().' - Asiento: '.$entrada->getNumero(),1);
+            $pdf->Ln();
+            $pdf->Text(10,70,$recinto->getNom());
+            $pdf->Ln();
+            $pdf->Text(10,80,$recinto->getAdreA()." ".$recinto->getCiutat() );       
         }
+        $pdf->Output("entradas.pdf","D");
     };
+
 }
 
 
